@@ -7,7 +7,7 @@ public class StopMoros {
   private final Set<String> spanishStopWords;
   private final StringBuilder paragraph;
   private final String language;
-  private final Set<String> detectedStopWords;
+  protected final Set<String> detectedStopWords;
 
   public StopMoros(StringBuilder paragraph, String language) {
     this.paragraph = paragraph;
@@ -69,6 +69,7 @@ public class StopMoros {
 
   public void detectStopWords() {
     // Get the appropriate stop words list based on language
+    // Flexing on the ternary 
     Set<String> stopWords = (language.startsWith("e")) ? englishStopWords : spanishStopWords;
 
     // Split the paragraph into words
@@ -84,5 +85,35 @@ public class StopMoros {
     }
 
     System.out.println("Stop words detected: " + String.join(", ", detectedStopWords));
+  }
+
+  public void morosStopped() {
+    if (detectedStopWords.isEmpty()){
+      System.out.println("\nNo stop words removed\n");
+    } else {
+      System.out.println("\nRemoving stop words too\n");
+
+      //In order to remove the stop words we need to first
+      //get both operands to the same type, then 
+      //filter the words in the sense to make 
+      //a correct substraction of those.
+
+      String resultText  = HCI.result.toString();
+
+      String[] words = resultText.split("\\s+");
+      StringBuilder filteredResult = new StringBuilder();
+
+      for (String word : words) {
+        String cleanWord = word.replaceAll("[^a-zA-Z]", "").toLowerCase();
+        if (cleanWord.isEmpty() || !detectedStopWords.contains(cleanWord)) {
+          filteredResult.append(word).append(" ");
+        }
+      }
+
+      HCI.result.setLength(0);
+      HCI.result.append(filteredResult.toString().trim());
+
+      System.out.println("Result after removing stop words: " + HCI.result.toString());
+    }
   }
 }

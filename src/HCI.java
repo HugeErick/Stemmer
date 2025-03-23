@@ -62,6 +62,7 @@ public class HCI {
         StringBuilder originalText = new StringBuilder(input);
         StopMoros stopMoros = new StopMoros(originalText, algorithm);
         stopMoros.detectStopWords();
+        stopMoros.morosStopped();
       }
 
       scanner.close();
