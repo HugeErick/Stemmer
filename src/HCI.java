@@ -2,6 +2,9 @@ import snowball.SnowballStemmer;
 import snowball.englishStemmer;
 import snowball.spanishStemmer;
 
+import org.fusesource.jansi.Ansi;
+import org.fusesource.jansi.AnsiConsole;
+
 import java.util.Scanner;
 
 public class HCI {
@@ -9,6 +12,8 @@ public class HCI {
 
   public void performStemming() {
     try {
+      AnsiConsole.systemInstall();
+
       System.out.println("Enter the stemmer language ('english' or 'spanish'):");
       Scanner scanner = new Scanner(System.in);
       String algorithm = scanner.nextLine().toLowerCase(); // Normalize input to lowercase
@@ -22,7 +27,9 @@ public class HCI {
       } else if (algorithm.charAt(0) == 's') {
         stemmer = new spanishStemmer();
       } else {
-        System.err.println("Unsupported language: " + algorithm);
+        System.err.println(
+          Ansi.ansi().fg(Ansi.Color.RED).a("Unsupported language: " + algorithm)
+        );
         return;
       }
 
@@ -56,7 +63,12 @@ public class HCI {
           }
         }
 
-        System.out.println("Lemmatized: " + result.toString().trim());
+        System.out.println(
+          Ansi.ansi()
+          .fg(Ansi.Color.GREEN).a("Lemmatized: ") // "Lemmatized:" in green
+          .fg(Ansi.Color.BLUE).a(result.toString().trim()) // Result in blue
+          .reset() // Reset formatting after the output
+        );
 
         // Create a StopMoros instance and detect stop words
         StringBuilder originalText = new StringBuilder(input);
@@ -68,7 +80,11 @@ public class HCI {
       scanner.close();
 
     } catch (Exception e) {
-      System.err.println("Error: " + e.getMessage());
+      System.err.println(
+        Ansi.ansi().fg(Ansi.Color.RED).a("Error: " + e.getMessage()).reset()
+      );
+    } finally {
+      AnsiConsole.systemUninstall();
     }
   }
 }

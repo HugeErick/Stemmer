@@ -2,7 +2,7 @@
 
 ## Description 
 
-My stemmer is a paragraph processor that aims to tokenize, stemm and remove stop words so it can be integrated to a basic files search engine, it uses part of the snowball software for even further word processing.
+My stemmer is a paragraph processor that aims to tokenize, "stemm" and remove stop words so it can be integrated to a basic files search engine, it uses part of the snowball software for even further word processing.
 
 ## Table of contents
 - [Installation](#installation)
@@ -28,11 +28,11 @@ cd Stemmer
 
 1. Compile (If need it) 
 ```bash
-javac -d bin src/*.java src/snowball/*.java
+javac -d bin -cp jansi-2.4.0.jar src/*.java src/snowball/*.java
 ```
 2. Run it
 ```bash
-java -cp bin Main
+java --enable-native-access=ALL-UNNAMED -cp bin:jansi-2.4.0.jar Main
 ```
 
 ## TODO
