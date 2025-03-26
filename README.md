@@ -30,9 +30,13 @@ cd Stemmer
 ```bash
 javac -d bin -cp jansi-2.4.0.jar src/*.java src/snowball/*.java
 ```
-2. Run it
+2. Run it (for Unix)
 ```bash
 java --enable-native-access=ALL-UNNAMED -cp bin:jansi-2.4.0.jar Main
+```
+2. Run it (for Windows)
+```bash
+java --enable-native-access=ALL-UNNAMED -cp bin;jansi-2.4.0.jar Main
 ```
 
 ## TODO
