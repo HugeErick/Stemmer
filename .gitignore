@@ -1,3 +1,7 @@
+### me ###
+/*.json
+/processedJsons/*.json
+
 ### IntelliJ IDEA ###
 out/
 !**/src/main/**/out/

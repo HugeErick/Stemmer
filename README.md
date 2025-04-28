@@ -28,15 +28,15 @@ cd Stemmer
 
 1. Compile (If need it) 
 ```bash
-javac -d bin -cp jansi-2.4.0.jar src/*.java src/snowball/*.java
+javac -d bin -cp jansi-2.4.0.jar:json-20250107.jar src/*.java src/snowball/*.java
 ```
 2. Run it (for Unix)
 ```bash
-java --enable-native-access=ALL-UNNAMED -cp bin:jansi-2.4.0.jar Main
+java --enable-native-access=ALL-UNNAMED -cp bin:jansi-2.4.0.jar:json-20250107.jar Main
 ```
 2. Run it (for Windows)
 ```bash
-java --enable-native-access=ALL-UNNAMED -cp bin;jansi-2.4.0.jar Main
+java --enable-native-access=ALL-UNNAMED -cp bin;jansi-2.4.0.jar;json-20250107.jar Main
 ```
 
 ## TODO
